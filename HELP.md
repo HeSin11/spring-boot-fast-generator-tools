@@ -1,9 +1,12 @@
 # Getting Started
 
-### Reference Documentation
-For further reference, please consider the following sections:
+### 使用说明
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.13/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.13/maven-plugin/reference/html/#build-image)
+1.自动生成代码
+直接执行 AutoGeneratorCommand.java 方法
+
+execute 方法中 可插拔控制不同的代码生成策略
+
+### 后续迭代
+页面可视化配置生成代码
 
