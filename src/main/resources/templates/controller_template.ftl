@@ -41,7 +41,7 @@ public class ${instance.className} {
     }
 
     @PostMapping("/update")
-    public CommonResult<Void> update(@RequestParam ${instance.importEntityName} ${instance.importEntityName?uncap_first}){
+    public CommonResult<Void> update(@RequestBody ${instance.importEntityName} ${instance.importEntityName?uncap_first}){
         ${instance.importServiceName?uncap_first}.updateById(${instance.importEntityName?uncap_first});
         return CommonResult.success();
     }
