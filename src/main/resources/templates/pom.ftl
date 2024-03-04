@@ -2,18 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>${instance.groupId}</groupId>
-    <artifactId>${instance.artifactId}</artifactId>
-    <version>${instance.version}</version>
-    <name>${instance.artifactId}</name>
+    <groupId>${instance.pomConfig.groupId}</groupId>
+    <artifactId>${instance.pomConfig.artifactId}</artifactId>
+    <version>${instance.pomConfig.version}</version>
+    <name>${instance.pomConfig.artifactId}</name>
     <description>demo</description>
     <properties>
-        <java.version>${instance.jdkVersion}</java.version>
+        <java.version>${instance.pomConfig.jdkVersion}</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>${instance.springBootVersion}</spring-boot.version>
-        <mysql-connector-version>${instance.mysqlConnectorVersion}</mysql-connector-version>
-        <mybatis-plus-starter.version>${instance.mybatisPlusVersion}</mybatis-plus-starter.version>
+        <spring-boot.version>${instance.pomConfig.springBootVersion}</spring-boot.version>
+        <mysql-connector-version>${instance.pomConfig.mysqlConnectorVersion}</mysql-connector-version>
+        <mybatis-plus-starter.version>${instance.pomConfig.mybatisPlusVersion}</mybatis-plus-starter.version>
+        <spring.fox.starter.version>${instance.pomConfig.springFoxStarterVersion}</spring.fox.starter.version>
     </properties>
     <dependencies>
         <dependency>
@@ -42,6 +43,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${r'${mysql-connector-version}'}</version>
         </dependency>
+        <#if instance.importSwagger>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+        </#if>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -51,6 +58,11 @@
                 <version>${r'${spring-boot.version}'}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${r'${spring.fox.starter.version}'}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -72,8 +84,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${r'${spring-boot.version}'}</version>
                 <configuration>
-                    <mainClass>${instance.packageName}.${instance.mainClass}</mainClass>
-                    <skip>true</skip>
+                    <mainClass>${instance.packageName}.${instance.pomConfig.mainClass}</mainClass>
                 </configuration>
                 <executions>
                     <execution>

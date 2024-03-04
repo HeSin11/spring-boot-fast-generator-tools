@@ -49,4 +49,9 @@ public class GeneratorStrategyConfig{
      * 表名列表
      */
     private List<String> tables;
+
+    /**
+     * 是否生成swagger接口
+     */
+    private Boolean swagger = Boolean.FALSE;
 }

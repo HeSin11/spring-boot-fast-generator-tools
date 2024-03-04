@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class GeneratePomConfig extends TemplateInstance {
+public class GeneratePomConfig{
     private String groupId;
 
     private String artifactId;
@@ -25,6 +25,9 @@ public class GeneratePomConfig extends TemplateInstance {
 
     @Builder.Default
     private String mybatisPlusVersion = "3.5.3.1";
+
+    @Builder.Default
+    private String springFoxStarterVersion = "3.0.0";
 
     @Builder.Default
     private String mainClass = "MainApplication";

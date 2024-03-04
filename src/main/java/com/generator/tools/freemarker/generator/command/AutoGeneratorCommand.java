@@ -12,9 +12,37 @@ import java.util.List;
 
 public class AutoGeneratorCommand {
 
+    /**
+     * 获取全局配置对象
+     * @param generatorConfig
+     * @return
+     */
+    public static GlobalDataConfig getGlobalDataConfig(GeneratorConfig generatorConfig) {
+        return new GlobalDataConfig(generatorConfig);
+    }
 
+    /**
+     * 指定某些模版生成
+     * @param generatorTemplates
+     * @throws Exception
+     */
+    public static void execute(List<AbstractGeneratorTemplate<? extends TemplateInstance>> generatorTemplates) throws Exception {
+        generatorTemplates.forEach(generatorTemplate->{
+            try {
+                generatorTemplate.generator();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    /**
+     * 直接生成整个项目
+     * @param generatorConfig
+     * @throws Exception
+     */
     public static void execute(GeneratorConfig generatorConfig) throws Exception {
-        GlobalDataConfig globalDataConfig = new GlobalDataConfig(generatorConfig);
+        GlobalDataConfig globalDataConfig = getGlobalDataConfig(generatorConfig);
         List<AbstractGeneratorTemplate<? extends TemplateInstance>> generatorTemplates = new ArrayList<>();
         generatorTemplates.add(new EntityTemplate(globalDataConfig));
         generatorTemplates.add(new ServiceTemplate(globalDataConfig));
@@ -24,6 +52,9 @@ public class AutoGeneratorCommand {
         generatorTemplates.add(new MybatisConfigTemplate(globalDataConfig));
         generatorTemplates.add(new QueryDTOTemplate(globalDataConfig));
         generatorTemplates.add(new ControllerTemplate(globalDataConfig));
+        if (generatorConfig.getStrategyConfig().getSwagger()){
+            generatorTemplates.add(new SwaggerConfigTemplate(globalDataConfig));
+        }
         generatorTemplates.add(new PomTemplate(globalDataConfig));
         generatorTemplates.add(new MainClassTemplate(globalDataConfig));
         generatorTemplates.add(new ResourcesTemplate(globalDataConfig));
@@ -40,15 +71,15 @@ public class AutoGeneratorCommand {
         GeneratorStrategyConfig strategyConfig = GeneratorStrategyConfig.builder()
                 .entityNameStrategy(NameStrategyEnum.UPPER_CAMEL_CASE)
                 .tablePrefixIgnore(Boolean.TRUE)
-                .tablePrefix("t_")
-                .tables(Arrays.asList("t_test"))
+                .tables(Arrays.asList("car_apply","user"))
                 .entitySuffix("Entity")
                 .serviceSuffix("Service")
+                .swagger(Boolean.TRUE)
                 .build();
 
         GeneratorPackageConfig packageConfig = GeneratorPackageConfig.builder()
-                .parentPackagePath("/com/generator/tools/")
-                .projectName("generator-demo")
+                .parentPackagePath("/com/back/car/")
+                .projectName("car-manager")
                 .entity("entity")
                 .mapper("mapper")
                 .service("service")
@@ -57,17 +88,17 @@ public class AutoGeneratorCommand {
 
         GeneratorDataSourceConfig dataSourceConfig = GeneratorDataSourceConfig.builder()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .jdbcUrl("jdbc:mysql://localhost:3306/generator_test")
+                .jdbcUrl("jdbc:mysql://121.41.34.161:3306/back_car?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
                 .username("root")
-                .password("12345678")
-                .database("generator_test")
+                .password("Pch010706")
+                .database("back_car")
                 .build();
 
 
         GeneratePomConfig generatePomConfig = GeneratePomConfig.builder()
-                .groupId("com.generator.demo")
-                .artifactId("generator-demo")
-                .mainClass("GeneratorApplication")
+                .groupId("com.back.car")
+                .artifactId("car-manager")
+                .mainClass("CarManagerApplication")
                 .build();
 
         GeneratorConfig generatorConfig = GeneratorConfig.builder()
@@ -77,6 +108,5 @@ public class AutoGeneratorCommand {
                 .pomConfig(generatePomConfig)
                 .build();
         execute(generatorConfig);
-
     }
 }
