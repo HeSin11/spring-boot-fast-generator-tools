@@ -19,4 +19,8 @@ public class FieldInfo {
      * 字段备注
      */
     private String fieldRemark;
+
+    private Boolean isFuzzy = Boolean.FALSE;
+
+    private String fuzzyType;
 }

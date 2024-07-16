@@ -71,15 +71,16 @@ public class AutoGeneratorCommand {
         GeneratorStrategyConfig strategyConfig = GeneratorStrategyConfig.builder()
                 .entityNameStrategy(NameStrategyEnum.UPPER_CAMEL_CASE)
                 .tablePrefixIgnore(Boolean.TRUE)
-                .tables(Arrays.asList("car_apply","user"))
+
+                .tables(Arrays.asList("metric_items","user_metric_items"))
                 .entitySuffix("Entity")
                 .serviceSuffix("Service")
                 .swagger(Boolean.TRUE)
                 .build();
 
         GeneratorPackageConfig packageConfig = GeneratorPackageConfig.builder()
-                .parentPackagePath("/com/back/car/")
-                .projectName("car-manager")
+                .parentPackagePath("/com/mall/")
+                .projectName("mall")
                 .entity("entity")
                 .mapper("mapper")
                 .service("service")
@@ -88,17 +89,17 @@ public class AutoGeneratorCommand {
 
         GeneratorDataSourceConfig dataSourceConfig = GeneratorDataSourceConfig.builder()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .jdbcUrl("jdbc:mysql://121.41.34.161:3306/back_car?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
+                .jdbcUrl("jdbc:mysql://47.99.98.244:3306/performance?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
                 .username("root")
-                .password("Pch010706")
-                .database("back_car")
+                .password("Xz993298")
+                .database("performance")
                 .build();
 
 
         GeneratePomConfig generatePomConfig = GeneratePomConfig.builder()
-                .groupId("com.back.car")
-                .artifactId("car-manager")
-                .mainClass("CarManagerApplication")
+                .groupId("com.mall.dal")
+                .artifactId("performance-manager")
+                .mainClass("PerformanceManagerApplication")
                 .build();
 
         GeneratorConfig generatorConfig = GeneratorConfig.builder()
