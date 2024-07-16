@@ -89,10 +89,10 @@ public class AutoGeneratorCommand {
 
         GeneratorDataSourceConfig dataSourceConfig = GeneratorDataSourceConfig.builder()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .jdbcUrl("jdbc:mysql://47.99.98.244:3306/performance?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
-                .username("root")
-                .password("Xz993298")
-                .database("performance")
+                .jdbcUrl("jdbc:mysql://xxx:3306/database?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
+                .username("xxxx")
+                .password("xxxx")
+                .database("database")
                 .build();
 
 
