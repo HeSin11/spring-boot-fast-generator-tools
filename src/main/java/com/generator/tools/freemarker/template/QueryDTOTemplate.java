@@ -30,7 +30,6 @@ public class QueryDTOTemplate extends AbstractGeneratorTemplate<QueryDTOTemplate
     private Map<String, List<String>> includeQueryFieldsGroup;
 
 
-
     public QueryDTOTemplate(GlobalDataConfig globalDataConfig) {
         super(globalDataConfig);
     }
